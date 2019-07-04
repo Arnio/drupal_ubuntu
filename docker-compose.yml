@@ -1,0 +1,37 @@
+version: '3.1'
+
+services:
+  db:
+    build: ./db
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_VERSION: '5.7.24'
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      MYSQL_DATABASE: drupal
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./databases:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+
+  app:
+    build: ./app
+    environment:
+      TZ: Europe/Kiev
+      DRUPAL_PROFILE: standard
+      DRUPAL_SITE_NAME: Drupal
+      DRUPAL_USER: admin
+      DRUPAL_PASS: admin
+      DRUPAL_DBURL: mysql://drupal:drupal@db:3306/drupal
+    ports:
+      - "8000:80"
+    volumes:
+      - ./drupal:/app
+    links:
+      - db:db
+    command: php -S 0.0.0.0:80 -t /app
+    working_dir: /app
+    restart: always
