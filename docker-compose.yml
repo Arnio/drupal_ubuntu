@@ -29,9 +29,9 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./drupal:/app
+      - ./drupal:/var/www/html
     links:
       - db:db
-    command: php -S 0.0.0.0:80 -t /app
+    command: php -S 0.0.0.0:80 -t /var/www/html
     working_dir: /app
     restart: always
