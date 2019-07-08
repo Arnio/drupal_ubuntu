@@ -28,12 +28,6 @@ services:
       DRUPAL_DBURL: mysql://drupal:drupal@db:3306/drupal
     ports:
       - "8000:80"
-    volumes:
-      - ./drupal:/var/www/html
     links:
       - db:db
-#    command: php -S 0.0.0.0:80 -t /var/www/html
-#    command: /etc/init.d/php7.3-fpm start && nginx -g "daemon off;"
-#    command: /bin/bash /start.sh
-#    working_dir: /var/www/html
     restart: always
