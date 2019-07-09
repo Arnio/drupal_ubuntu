@@ -39,11 +39,11 @@ RUN cp -R drupal/ html && \
 
 RUN composer create-project burdamagazinorg/thunder-project thunder --no-interaction
 RUN cd thunder/docroot && \
-RUN php core/scripts/drupal quick-start thunder
+    php core/scripts/drupal quick-start thunder
 
 COPY ./default /etc/nginx/sites-available/default
 COPY ./start.sh /usr/local/bin/
 
 RUN chmod u+x /usr/local/bin/start.sh
-EXPOSE 80
+EXPOSE 80 8888
 ENTRYPOINT [ "start.sh" ]
