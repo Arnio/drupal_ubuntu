@@ -37,10 +37,6 @@ RUN cp -R drupal/ html && \
     composer install --no-progress --profile --prefer-dist && \
     chown -R www-data:www-data /var/www/html 
 
-RUN composer create-project burdamagazinorg/thunder-project thunder --no-interaction
-RUN cd thunder/docroot && \
-    php core/scripts/drupal quick-start thunder
-
 COPY ./default /etc/nginx/sites-available/default
 COPY ./start.sh /usr/local/bin/
 

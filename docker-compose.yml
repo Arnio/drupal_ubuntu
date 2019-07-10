@@ -19,15 +19,13 @@ services:
 
   app:
     build: ./app
+    image: arnio/drupal:1.0
     environment:
       TZ: Europe/Kiev
-      DRUPAL_PROFILE: standard
-      DRUPAL_SITE_NAME: Drupal
-      DRUPAL_USER: admin
-      DRUPAL_PASS: admin
-      DRUPAL_DBURL: mysql://drupal:drupal@db:3306/drupal
     ports:
       - "8000:80"
     links:
       - db:db
+    depends_on:
+      - db  
     restart: always
